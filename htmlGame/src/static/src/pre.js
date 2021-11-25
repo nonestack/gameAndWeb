@@ -11,20 +11,17 @@
 //const num1024 = new PIXI.Container();
 //const num2048 = new PIXI.Container();
 
-//let blockPosition = new Array(16);
-let blockPosition = [
-    [17, 17], 
-]
-
-function createBlock(){
+function createBlock(num){
     let block = new PIXI.Container();
-    let tmpNum = PIXI.Sprite.from("./image/block_2.png");
-    //let rand = Math.ceil(Math.random()*10);
-    //begin(17, 17)
-    //midst 17
-    //block 135 - 35 = 100
-    tmpNum.x = 17;
-    tmpNum.y = 135;
+    let tmpNum = new PIXI.Graphics();
+    let rand = Math.ceil(Math.random()*10);
+    tmpNum.beginFill(0xde3248);
+    tmpNum.drawRect(rand, rand, rand, rand);
+    tmpNum.endFill();
+
+    const numStr = new PIXI.Text(num.toString());
+
+    tmpNum.addChild(numStr);
 
     block.addChild(tmpNum);
     return block;
@@ -78,40 +75,33 @@ function init_Scene() {
     app.renderer.autoResize = true;
     app.renderer.resize(window.innerWidth, window.innerHeight);
 
-    //init game scene
-    let gameScene = new PIXI.Container();
-    let background = PIXI.Sprite.from("./image/background.png");
-
-    gameScene.addChild(background);
-
-    //gameScene.x = app.screen.width / 2 - gameScene.width / 2;
-    //gameScene.y = app.screen.height / 2 - gameScene.height / 2;
-    gameScene.x = app.screen.width / 2;
-    gameScene.y = app.screen.height / 2;
-
-    gameScene.pivot.x = gameScene.width / 2;
-    gameScene.pivot.y = gameScene.height / 2;
-
-    //console.log(app.screen.width);
-    //console.log(app.screen.height);
-    //console.log(gameScene.width);
-    //console.log(gameScene.height);
-
-    
-    //let blockArr = new Array(16);
-
-
-    app.stage.addChild(gameScene);
-
-    gameScene.addChild(createBlock());
-
-
     return app;
 }
 //app.stage.addChild(sprite);
 
 function init_Unit(app) {
+    myContainer = new PIXI.Container();
+    //let sprite = PIXI.Sprite.from("./doge.jpg");
 
+    const num1_b = new PIXI.Graphics();
+    num1_b.beginFill(0xDE3249);
+    num1_b.drawRect(50, 50, 100, 100);
+    num1_b.endFill();
+
+    num1_b.beginFill(0x112342);
+    num1_b.drawRect(500, 50, 550, 100);
+    num1_b.endFill();
+
+    const num1 = new PIXI.Text("1");
+    num1.x = 100;
+    num1.y = 100;
+    num1_b.addChild(num1);
+
+    myContainer.addChild(num1_b);
+    app.stage.addChild(myContainer);
+
+    //console.log(myContainer);
+    return myContainer;
 }
 
 function moveFunc(delta, vx, vy){
@@ -158,11 +148,11 @@ function animation(myContainer, app) {
 
 function main() {
     let app = init_Scene();
-    //let myContainer = init_Unit(app);
+    let myContainer = init_Unit(app);
     //init_Scene(app);
     //init_Unit(myContainer, app);
-    //animation(myContainer, app);
-    //console.log(myContainer);
+    animation(myContainer, app);
+    console.log(myContainer);
 }
 
 main();
