@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://pixijs.download/release/pixi.js"></script>
+  </head>
+  <body>
+    <script>
+      let app = new PIXI.Application({width:640, height: 360});
+      document.body.appendChild(app.view);
+      let sprite = PIXI.Sprite.from("doge.jpg");
+      app.stage.addChild(sprite);
+      
+      let elapse = 0.0;
+
+      app.ticker.add((delta) => {
+        console.log(delta);
+        elapse += delta;
+
+        sprite.x = 100.0 + Math.cos(elapse / 50.0) * 100.0;
+      });
+    </script>
+  </body>
+</html>
