@@ -11,10 +11,12 @@ func main() {
 	fs := http.FileServer(http.Dir("static"))
 
 	port := "8080"
-	http.HandleFunc("/", indexHandler)
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", indexHandler)
+	mux.Handle("/static/", http.StripPrefix("/static/", fs))
+	//mux.HandleFunc("/")
 	//http.Handle("/static", fs)
-	http.ListenAndServe(":"+port, nil)
+	http.ListenAndServe(":"+port, mux)
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
