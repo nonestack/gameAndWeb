@@ -143,7 +143,7 @@ function(e) {
                 r = a.data("success"),
                 d = n.data("email");
                 return a.empty(),
-                "" === i || "" === t || "" === s || "" === d ? n.find(".empty_notice").slideDown(500).delay(2e3).slideUp(500) : e.post("modal/contact.php", {
+                "" === i || "" === t || "" === s || "" === d ? n.find(".empty_notice").slideDown(500).delay(2e3).slideUp(500) : e.post("/model", {
                     ajax_name: i,
                     ajax_email: t,
                     ajax_emailto: d,

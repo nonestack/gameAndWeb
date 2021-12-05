@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -14,9 +15,14 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", indexHandler)
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
-	//mux.HandleFunc("/")
+	mux.HandleFunc("/model", tempHandler)
 	//http.Handle("/static", fs)
 	http.ListenAndServe(":"+port, mux)
+}
+
+func tempHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	fmt.Fprintf(w, "Hello World!")
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
